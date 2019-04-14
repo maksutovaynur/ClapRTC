@@ -2,8 +2,7 @@ import asyncio
 import json
 import os
 import platform
-import fileinput
-import time
+from aiohttp import web
 from aiortc import RTCPeerConnection, RTCSessionDescription
 from aiortc.contrib.media import MediaPlayer
 
@@ -57,23 +56,13 @@ async def offer(stri):
             'type': pc.localDescription.type
         }))
 
-
-
-
-
-
 pcs = set()
 
-
-async def on_shutdown():
+async def on_shutdown(app):
     # close peer connections
     coros = [pc.close() for pc in pcs]
     await asyncio.gather(*coros)
     pcs.clear()
-
-
-
-from aiohttp import web
 
 
 if __name__ == '__main__':
