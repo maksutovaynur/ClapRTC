@@ -33,7 +33,7 @@ async def offer(stri):
     if platform.system() == 'Darwin':
         player = MediaPlayer('default:none', format='avfoundation', options=options)
     else:
-        player = MediaPlayer('/dev/video0', format='v4l2', options=options)
+        player = MediaPlayer('/dev/video0', format='h264', options=options)
 
     print("Webcam configured")
 
