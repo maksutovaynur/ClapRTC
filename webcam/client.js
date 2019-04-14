@@ -38,8 +38,8 @@ function negotiate() {
                 type: offer.type,
             });
         alert(sdp_offer);
-        var sdp_answer = prompt("Enter sdp answer", "<sdp_answer>");
-        return pc.setRemoteDescription(answer);
+        var sdp_answer = JSON.parse(prompt("Enter sdp answer", "<sdp_answer>"));
+        return pc.setRemoteDescription(sdp_answer);
     }).catch(function(e) {
         alert(e);
     });
