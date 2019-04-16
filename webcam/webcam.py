@@ -29,7 +29,7 @@ async def offer(stri):
 
     print("Before webcam")
 
-    print(f"Platform System = '{platform.system()}'")
+    print("Platform System = '{}'".format(platform.system()))
 
     # open webcam
     options = {'framerate': '30', 'video_size': '640x480'}
