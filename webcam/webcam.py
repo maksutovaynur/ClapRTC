@@ -23,6 +23,7 @@ async def offer(stri):
     async def on_iceconnectionstatechange():
         print('ICE connection state is %s' % pc.iceConnectionState)
         if pc.iceConnectionState == 'failed':
+            print("ICE connection failed")
             await pc.close()
             pcs.discard(pc)
 
