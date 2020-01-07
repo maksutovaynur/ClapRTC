@@ -9,13 +9,7 @@ from aiortc.contrib.media import MediaPlayer
 ROOT = os.path.dirname(__file__)
 
 
-async def offer(stri):
-    print("Enter offer")
-    params = json.loads(stri)
-    offer = RTCSessionDescription(
-        sdp=params['sdp'],
-        type=params['type'])
-
+async def offer():
     pc = RTCPeerConnection()
     pcs.add(pc)
 
@@ -39,6 +33,13 @@ async def offer(stri):
         player = MediaPlayer('/dev/video0', format='v4l2', options=options)
 
     print("Webcam configured")
+
+
+    params = json.loads(input("Enter sdp offer from javascript\n"))
+
+    offer = RTCSessionDescription(
+        sdp=params['sdp'],
+        type=params['type'])
 
     await pc.setRemoteDescription(offer)
     for t in pc.getTransceivers():
@@ -69,9 +70,7 @@ async def on_shutdown(app):
 
 
 if __name__ == '__main__':
-    stri = input("Enter sdp offer from javascript\n")
-    print("Taken sdp offer")
-    asyncio.get_event_loop().run_until_complete(offer(stri))
+    asyncio.get_event_loop().run_until_complete(offer())
     app = web.Application()
     app.on_shutdown.append(on_shutdown)
     web.run_app(app, port=8080, ssl_context=None)
